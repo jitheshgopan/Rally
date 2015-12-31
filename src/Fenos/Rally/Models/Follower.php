@@ -19,7 +19,7 @@ class Follower extends Model {
 
     public function follower()
     {
-        if (\Config::get('rally::polymorphic') !== false)
+        if (\Config::get('rally.polymorphic') !== false)
         {
             return $this->morphTo();
         }
@@ -29,7 +29,7 @@ class Follower extends Model {
 
     public function followed()
     {
-        if (\Config::get('rally::polymorphic') !== false)
+        if (\Config::get('rally.polymorphic') !== false)
         {
             return $this->morphTo();
         }

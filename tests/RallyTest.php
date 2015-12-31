@@ -57,7 +57,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $result = $mockRally->follower('User',1);
@@ -76,7 +76,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(false);
 
         $result = $mockRally->follower(1);
@@ -114,7 +114,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $this->rallyRepo->shouldReceive('follow')
@@ -155,7 +155,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(false);
 
         $this->rallyRepo->shouldReceive('follow')
@@ -188,7 +188,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $this->rallyRepo->shouldReceive('isFollower')
@@ -219,7 +219,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(false);
 
         $this->rallyRepo->shouldReceive('isFollower')
@@ -250,7 +250,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(false);
 
         $this->rallyRepo->shouldReceive('isFollower')
@@ -502,7 +502,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
     {
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $result = $this->rally->lightValidation('User',1);
@@ -517,7 +517,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
     {
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $this->rally->lightValidation(10,1);
@@ -531,7 +531,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
     {
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $this->rally->lightValidation('must be','a number');
@@ -541,7 +541,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
     {
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(false);
 
         $result = $this->rally->lightValidation(1);
@@ -555,7 +555,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $result = $this->rally->checkFollowerInformation();
@@ -570,7 +570,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
     {
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(true);
 
         $this->rally->checkFollowerInformation();
@@ -582,7 +582,7 @@ class RallyTest extends PHPUnit_Framework_TestCase {
 
         $this->config->shouldReceive('get')
             ->once()
-            ->with('rally::polymorphic')
+            ->with('rally.polymorphic')
             ->andReturn(false);
 
         $result = $this->rally->checkFollowerInformation();

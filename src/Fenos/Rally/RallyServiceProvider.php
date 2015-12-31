@@ -56,9 +56,9 @@ class RallyServiceProvider extends ServiceProvider {
     {
         $this->app->bind('rally.repository', function($app){
 
-            if ($this->app['config']->get('rally::polymorphic') !== false)
+            if ($this->app['config']->get('rally.polymorphic') !== false)
             {
-                if (($bindClass = $this->app['config']->get('rally::polymorphic.repository')) == null) {
+                if (($bindClass = $this->app['config']->get('rally.polymorphic.repository')) == null) {
                     $bindClass = "\Fenos\Rally\Repositories\RallyPolymorphicRepository";
                 }
             }
