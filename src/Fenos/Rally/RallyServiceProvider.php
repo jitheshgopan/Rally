@@ -19,7 +19,14 @@ class RallyServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        $this->package('fenos/rally');
+        $configPath =   __DIR__ . '/../../config/config.php';
+        $this->publishes([
+            $configPath => config_path('rally.php')
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../../migrations/' => database_path('/migrations')
+        ], 'migrations');
     }
 
     /**
