@@ -185,8 +185,7 @@ class RallyRepository implements RallyRepositoryInterface {
      */
     public function countFollowers(array $followed)
     {
-        return $this->follow->select($this->db->raw('Count(*) as numbers_followers'))
-            ->where('followed_id',$followed['follower_id'])->first();
+        return $this->follow->where('followed_id',$followed['follower_id'])->count();
     }
 
     /**

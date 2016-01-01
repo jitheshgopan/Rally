@@ -199,9 +199,8 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
      */
     public function countFollowers(array $followed)
     {
-        return $this->follow->select($this->db->raw('Count(*) as numbers_followers'))
-            ->where('followed_type', $followed['follower_type'])
-            ->where('followed_id',$followed['follower_id'])->first();
+        return $this->follow->where('followed_type', $followed['follower_type'])
+            ->where('followed_id',$followed['follower_id'])->count();
     }
 
     /**

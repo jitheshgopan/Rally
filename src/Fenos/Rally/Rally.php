@@ -145,7 +145,7 @@ class Rally {
             return false;
         }
 
-        return $check;
+        return true;
     }
 
     /**
