@@ -34,7 +34,7 @@ class Follower extends Model {
             return $this->morphTo();
         }
 
-        return $this->hasOne(\Config::get('rally::model'),'follower_id');
+        return $this->hasOne(\Config::get('rally::model'),'followed_id');
     }
 
 }
