@@ -179,7 +179,7 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
      */
     public function listsFollowing(array $followed,$filters)
     {
-        $lists = $this->follow->with('follower')
+        $lists = $this->follow->with('followed')
             ->where('follower_type', $followed['follower_type'])
             ->where('follower_id',$followed['follower_id']);
 
