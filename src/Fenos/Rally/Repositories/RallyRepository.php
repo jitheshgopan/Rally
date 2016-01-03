@@ -62,10 +62,19 @@ class RallyRepository implements RallyRepositoryInterface {
      */
     public function isFollower(array $follower)
     {
+        return (!is_null($this->getFollowerRecord($follower)));
+
+    }
+
+    /**
+     * @param array $follower
+     * @return mixed
+     */
+    public function getFollowerRecord(array $follower)
+    {
         return $this->follow->where('follower_id',  $follower['follower_id'])
             ->where('followed_id',$follower['followed_id'])
             ->first();
-
     }
 
     /**
@@ -166,7 +175,7 @@ class RallyRepository implements RallyRepositoryInterface {
      */
     public function listsFollowing(array $followed,$filters)
     {
-        $lists = $this->follow->with('followed')
+        $lists = $this->follow->with('follower')
             ->where('follower_id',$followed['follower_id']);
 
         $this->addFilters($lists,$filters);
@@ -194,8 +203,7 @@ class RallyRepository implements RallyRepositoryInterface {
      */
     public function countFollowing(array $followed)
     {
-        return $this->follow->select($this->db->raw('Count(*) as numbers_followers'))
-            ->where('follower_id',$followed['follower_id'])->first();
+        return $this->follow->where('follower_id',$followed['follower_id'])->count();
     }
 
     /**

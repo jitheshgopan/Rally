@@ -47,12 +47,22 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
      */
     public function isFollower(array $follower)
     {
+        return (!is_null($this->getFollowerRecord($follower)));
+
+    }
+
+    /**
+     * @param array $follower
+     * @return mixed
+     */
+    public function getFollowerRecord(array $follower)
+    {
         return $this->follow->where('follower_type',$follower['follower_type'])
-                            ->where('follower_id',  $follower['follower_id'])
-                            ->where(function($where) use ($follower){
-                                $where->where('followed_type',$follower['followed_type'])
-                                ->where('followed_id',$follower['followed_id']);
-                            })->first();
+            ->where('follower_id',  $follower['follower_id'])
+            ->where(function($where) use ($follower){
+                $where->where('followed_type',$follower['followed_type'])
+                    ->where('followed_id',$follower['followed_id']);
+            })->first();
 
     }
 
@@ -128,16 +138,16 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
     public function listsFollowers(array $followed,$filters)
     {
         $lists = $this->follow->with('follower')
-                              ->where('followers.followed_type', $followed['follower_type'])
-                              ->where('followers.followed_id',$followed['follower_id'])
-                              ->leftJoin('followers as fol',function($join) use ($followed)
-                                {
-                                    $join->on('fol.follower_id','=','followers.followed_id')
-                                        ->on('fol.followed_id','=','followers.follower_id');
-                                })
-                              ->groupBy('followers.follower_id')
-                              ->groupBy('fol.follower_id')
-                              ->select('followers.*',"fol.followed_id as is_fan");
+            ->where('followers.followed_type', $followed['follower_type'])
+            ->where('followers.followed_id',$followed['follower_id'])
+            ->leftJoin('followers as fol',function($join) use ($followed)
+            {
+                $join->on('fol.follower_id','=','followers.followed_id')
+                    ->on('fol.followed_id','=','followers.follower_id');
+            })
+            ->groupBy('followers.follower_id')
+            ->groupBy('fol.follower_id')
+            ->select('followers.*',"fol.followed_id as is_fan");
 
         $this->addFilters($lists,$filters);
 
@@ -179,7 +189,7 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
      */
     public function listsFollowing(array $followed,$filters)
     {
-        $lists = $this->follow->with('followed')
+        $lists = $this->follow->with('follower')
             ->where('follower_type', $followed['follower_type'])
             ->where('follower_id',$followed['follower_id']);
 
@@ -209,9 +219,8 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
      */
     public function countFollowing(array $followed)
     {
-        return $this->follow->select($this->db->raw('Count(*) as numbers_followers'))
-            ->where('follower_type', $followed['follower_type'])
-            ->where('follower_id',$followed['follower_id'])->first();
+        return $this->follow->where('follower_type', $followed['follower_type'])
+            ->where('follower_id',$followed['follower_id'])->count();
     }
 
     /**

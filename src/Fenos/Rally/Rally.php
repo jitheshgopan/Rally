@@ -124,6 +124,16 @@ class Rally {
      */
     public function isFollowerOf($followed_type,$followed_id = false)
     {
+        $followerRecord = $this->getFollowerRecord($followed_type,$followed_id);
+        if (is_null($followerRecord))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getFollowerRecord($followed_type,$followed_id = false){
         // check that there are the informations of the follower
         $this->checkFollowerInformation();
 
@@ -138,14 +148,7 @@ class Rally {
         }
 
         // check if the current entity is follower of the current entity
-        $check = $this->rallyRepository->isFollower($this->follower);
-
-        if (is_null($check))
-        {
-            return false;
-        }
-
-        return true;
+        return $this->rallyRepository->getFollowerRecord($this->follower);
     }
 
     /**
@@ -175,7 +178,8 @@ class Rally {
 
         if ($isFollower !== false)
         {
-            return $this->rallyRepository->unFollow($isFollower);
+            $followerRecord = $this->getFollowerRecord($followed_type,$followed_id);
+            return $this->rallyRepository->unFollow($followerRecord);
         }
 
         throw new FollowerNotFoundException('Relation with thoose followers not found');

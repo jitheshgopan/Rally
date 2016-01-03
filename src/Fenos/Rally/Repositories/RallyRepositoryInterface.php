@@ -29,9 +29,15 @@ interface RallyRepositoryInterface {
 
     /**
      * @param array $follower
-     * @return mixed
+     * @return boolean
      */
     public function isFollower(array $follower);
+
+    /**
+     * @param array $follower
+     * @return mixed
+     */
+    public function getFollowerRecord(array $follower);
 
     /**
      * @param array $followed
